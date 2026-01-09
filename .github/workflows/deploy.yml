@@ -1,0 +1,4 @@
+# Placeholder for Phase 3 Azure Deployment
+# GitHub Actions workflow will be configured here
+# Triggers on push to main branch
+# Deploys to Azure App Service

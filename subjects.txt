@@ -1,0 +1,148 @@
+Subject ID (numeric): 143163
+Subject Identifier: TEST_CO2506181446
+Site Identifier: None
+Gender: Female
+Wear Position: Left Non-Dominant Wrist
+Assignment Status: Not Assigned
+--------------------------------------------------
+Subject ID (numeric): 143183
+Subject Identifier: TEST_MQ/2506182122
+Site Identifier: None
+Gender: Female
+Wear Position: Left Non-Dominant Wrist
+Assignment Status: Not Assigned
+--------------------------------------------------
+Subject ID (numeric): 143184
+Subject Identifier: TEST_AZ/2506182134
+Site Identifier: None
+Gender: Female
+Wear Position: Left Non-Dominant Wrist
+Assignment Status: Not Assigned
+--------------------------------------------------
+Subject ID (numeric): 143185
+Subject Identifier: TEST_DZ/2506182145
+Site Identifier: None
+Gender: Female
+Wear Position: Left Non-Dominant Wrist
+Assignment Status: Not Assigned
+--------------------------------------------------
+Subject ID (numeric): 144974
+Subject Identifier: TEST-CO/2507211302
+Site Identifier: None
+Gender: Female
+Wear Position: Left Non-Dominant Wrist
+Assignment Status: Not Assigned
+--------------------------------------------------
+Subject ID (numeric): 145614
+Subject Identifier: ABP-IM/2507161423 
+Site Identifier: None
+Gender: Male
+Wear Position: Left Non-Dominant Wrist
+Assignment Status: Not Assigned
+--------------------------------------------------
+Subject ID (numeric): 145615
+Subject Identifier: IM/2507161423 
+Site Identifier: None
+Gender: Male
+Wear Position: Left Non-Dominant Wrist
+Assignment Status: Assigned
+--------------------------------------------------
+Subject ID (numeric): 146280
+Subject Identifier: CF/2502211725
+Site Identifier: None
+Gender: Female
+Wear Position: Left Non-Dominant Wrist
+Assignment Status: Not Assigned
+--------------------------------------------------
+Subject ID (numeric): 148932
+Subject Identifier: AK/2509081926
+Site Identifier: None
+Gender: Female
+Wear Position: Left Non-Dominant Wrist
+Assignment Status: Assigned
+--------------------------------------------------
+Subject ID (numeric): 149253
+Subject Identifier: HY/2509261231
+Site Identifier: None
+Gender: Male
+Wear Position: Left Non-Dominant Wrist
+Assignment Status: Not Assigned
+--------------------------------------------------
+Subject ID (numeric): 149984
+Subject Identifier: GE/2510171458
+Site Identifier: None
+Gender: Male
+Wear Position: Left Non-Dominant Wrist
+Assignment Status: Assigned
+--------------------------------------------------
+Subject ID (numeric): 150021
+Subject Identifier: TEST
+Site Identifier: None
+Gender: Female
+Wear Position: Left Non-Dominant Wrist
+Assignment Status: Not Assigned
+--------------------------------------------------
+Subject ID (numeric): 150439
+Subject Identifier: SP/2510281120
+Site Identifier: None
+Gender: Female
+Wear Position: Left Non-Dominant Wrist
+Assignment Status: Not Assigned
+--------------------------------------------------
+Subject ID (numeric): 150577
+Subject Identifier: DK/2510281131
+Site Identifier: None
+Gender: Female
+Wear Position: Left Non-Dominant Wrist
+Assignment Status: Not Assigned
+--------------------------------------------------
+Subject ID (numeric): 150591
+Subject Identifier: CW/2510081935
+Site Identifier: None
+Gender: Male
+Wear Position: Left Non-Dominant Wrist
+Assignment Status: Assigned
+--------------------------------------------------
+Subject ID (numeric): 150677
+Subject Identifier: JL/2509091244
+Site Identifier: None
+Gender: Female
+Wear Position: Left Non-Dominant Wrist
+Assignment Status: Not Assigned
+--------------------------------------------------
+Subject ID (numeric): 151058
+Subject Identifier: SF/2510281419
+Site Identifier: None
+Gender: Male
+Wear Position: Left Non-Dominant Wrist
+Assignment Status: Assigned
+--------------------------------------------------
+Subject ID (numeric): 151231
+Subject Identifier: AD/2510281144
+Site Identifier: None
+Gender: Female
+Wear Position: Left Non-Dominant Wrist
+Assignment Status: Not Assigned
+--------------------------------------------------
+Subject ID (numeric): 151819
+Subject Identifier: TEST-NM/2512041700
+Site Identifier: None
+Gender: Male
+Wear Position: Right Non-Dominant Wrist
+Assignment Status: Assigned
+--------------------------------------------------
+Subject ID (numeric): 152120
+Subject Identifier: GW/2510281157
+Site Identifier: None
+Gender: Female
+Wear Position: Right Dominant Wrist
+Assignment Status: Assigned
+--------------------------------------------------
+Subject ID (numeric): 152810
+Subject Identifier: CQ2512051115
+Site Identifier: None
+Gender: Female
+Wear Position: Left Non-Dominant Wrist
+Assignment Status: Assigned
+--------------------------------------------------
+
