@@ -12,6 +12,11 @@ def fetch_event_markers(
     from_date: str,
     to_date: str
 ) -> Optional[Dict[str, Any]]:
+    """
+    Fetch all event markers for a subject with automatic pagination.
+    
+    Uses offset-based pagination to ensure all records are retrieved.
+    """
     base_url = "https://api.actigraphcorp.com"
     endpoint = f"/analytics/v3/Studies/{study_id}/Subjects/{subject_id}/EventMarkers"
     url = f"{base_url}{endpoint}"
@@ -21,20 +26,23 @@ def fetch_event_markers(
         "Accept": "application/json"
     }
     
-    params = {
-        "fromDate": from_date,
-        "toDate": to_date,
-        "offset": 0,
-        "limit": 100
-    }
-    
     all_items: List[Dict[str, Any]] = []
+    offset = 0
+    limit = 100
+    total_count = None
     
     try:
         logger.info(f"Fetching event markers for Study ID: {study_id}, Subject ID: {subject_id}")
         logger.info(f"Date range: {from_date} to {to_date}")
         
         while True:
+            params = {
+                "fromDate": from_date,
+                "toDate": to_date,
+                "offset": offset,
+                "limit": limit
+            }
+            
             response = requests.get(url, headers=headers, params=params)
             
             if response.status_code != 200:
@@ -44,29 +52,23 @@ def fetch_event_markers(
             data = response.json()
             items = data.get("items", [])
             total_count = data.get("totalCount", 0)
-            current_offset = data.get("offset", 0)
-            limit = data.get("limit", 100)
             
             all_items.extend(items)
             
-            logger.info(f"Retrieved {len(items)} items (offset: {current_offset}, total: {len(all_items)}/{total_count})")
+            logger.info(f"Retrieved {len(items)} items (offset: {offset}, total: {len(all_items)}/{total_count})")
             
-            if len(all_items) >= total_count:
+            # Stop if we have all items or no more items returned
+            if len(all_items) >= total_count or len(items) == 0:
                 break
             
-            next_link = data.get("links", {}).get("next")
-            if not next_link:
-                break
-            
-            params["offset"] = current_offset + limit
+            # Move to next page
+            offset += limit
         
         logger.info(f"Successfully retrieved all {len(all_items)} event markers")
         
         return {
             "items": all_items,
-            "totalCount": len(all_items),
-            "limit": 100,
-            "offset": 0
+            "totalCount": len(all_items)
         }
     
     except requests.exceptions.RequestException as e:

@@ -43,11 +43,40 @@ Validate ActiGraph credentials and API connectivity.
    - `CLIENT_ID`: ActiGraph API client ID
    - `CLIENT_SECRET`: ActiGraph API client secret
    - `STUDY_ID`: Study ID for testing
-   - `SUBJECT_ID`: Subject ID for testing
-   - `FROM_DATE` / `TO_DATE`: Date range (YYYY-MM-DD)
+   - `APP_PASSWORD`: Password for application access
+   - `SUBJECT_ID`: Subject ID for testing (Phase 1 only)
+   - `FROM_DATE` / `TO_DATE`: Date range (YYYY-MM-DD, Phase 1 only)
 
 3. Run verification script:
    ```bash
+   uv run python scripts/verify_api.py
+   ```
+
+### Phase 2: Application Development ✅
+
+Build the interactive Streamlit interface with subject identifier dropdown.
+
+**Features:**
+- Simple password-based authentication
+- Automatic subject list refresh on login
+- Subject selection via user-friendly identifiers (not numeric IDs)
+- Internal mapping of Subject Identifier → Subject ID
+- Date range selection
+- CSV export functionality
+
+**Run Locally:**
+```bash
+uv run streamlit run src/app.py
+```
+
+**Usage:**
+1. Open browser at `http://localhost:8501`
+2. Enter the application password (from `.env`)
+3. Wait for subjects to load (happens automatically after login)
+4. Select subject identifier from dropdown
+5. Choose date range
+6. Click "Fetch Event Markers"
+7. Download CSV
    uv run scripts/verify_api.py
    ```
 

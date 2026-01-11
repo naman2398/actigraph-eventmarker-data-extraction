@@ -90,13 +90,21 @@ This project will be executed in three distinct phases.
 **Goal:** Build the interactive user interface and full data extraction logic.
 
 **UI Layout:**
-- **Login State:** A simple text input asking for the "App Access Password." The main tool remains hidden until the correct password is entered.
+- **Initialization:** On first load, the application automatically:
+  1. Authenticates with the ActiGraph API using CLIENT_ID and CLIENT_SECRET from environment variables
+  2. Fetches the complete list of subjects from `/Studies/{studyId}/Subjects` endpoint
+  3. Builds an internal mapping of Subject Identifier → Subject ID
+  4. Displays success message when ready
 - **Main Dashboard:**
-  - Input fields for Study ID and Subject ID
+  - Study ID is hardcoded in environment variables (not visible to user)
+  - Dropdown menu for Subject Identifier selection (user-friendly names)
   - Date pickers for Start Date and End Date
   - A primary "Fetch Data" action button
+  - Sidebar with "Refresh Subject List" button to manually update the subject list
 
 **Backend Processing:**
+- **Subject List Fetcher:** On successful login, retrieve all subjects from the `/Studies/{studyId}/Subjects` endpoint and create an internal dictionary mapping Subject Identifier (string) to Subject ID (numeric)
+- **Subject ID Resolution:** When user selects a Subject Identifier from dropdown, internally resolve it to the corresponding Subject ID for the API call
 - **Pagination Handler:** Implement a loop that checks the `totalCount` from the API response and automatically fetches subsequent pages until all records are retrieved
 - **Data Formatting:** Flatten the JSON response into a Pandas DataFrame
 - **Export Utility:** Convert the DataFrame to CSV and render a `st.download_button`
@@ -105,7 +113,7 @@ This project will be executed in three distinct phases.
 - Use `uv` to add `streamlit` and `pandas`
 - Generate a `requirements.txt` file from the `uv` lockfile
 
-**Outcome:** A fully functional application running on localhost where a user can log in, fetch data, and download a CSV.
+**Outcome:** A fully functional application running on localhost where a user can log in (triggering subject list refresh), select subjects by their identifier, fetch data, and download a CSV.
 
 ---
 
