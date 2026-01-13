@@ -4,11 +4,14 @@ from datetime import date
 import streamlit as st
 import pandas as pd
 
-from dotenv import load_dotenv
 from api import get_access_token, clear_token_cache, fetch_subjects, fetch_event_markers
 
-# Load environment variables
-load_dotenv()
+# Load environment variables from .env file (local development only)
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass  # dotenv not needed in production (Azure injects env vars)
 
 # Configure logging
 logging.basicConfig(
