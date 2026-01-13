@@ -35,7 +35,6 @@ jobs:
           name: python-app
           path: |
             .
-            !antenv/
             !.env
             !.git/
             !__pycache__/
