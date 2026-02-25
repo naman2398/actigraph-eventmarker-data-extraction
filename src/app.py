@@ -247,15 +247,15 @@ def main():
             df = pd.DataFrame(items)
             df.insert(0, "subject_identifier", selected_identifier)
 
-            # Add Eastern Time column derived from timestampUtc (case-insensitive match)
-            ts_col = next((c for c in df.columns if c.lower() == "timestamputc"), None)
-            if ts_col:
-                utc_col = pd.to_datetime(df[ts_col], utc=True)
-                et_col = utc_col.dt.tz_convert("America/New_York")
-                et_position = df.columns.get_loc(ts_col) + 1
+            # Add Eastern Time column derived from timestampUtc
+            if "timestampUtc" in df.columns:
+                et_col = (
+                    pd.to_datetime(df["timestampUtc"], utc=True)
+                    .dt.tz_convert("America/New_York")
+                    .dt.strftime("%Y-%m-%dT%H:%M:%S%z")
+                )
+                et_position = df.columns.get_loc("timestampUtc") + 1
                 df.insert(et_position, "timestampET", et_col)
-            else:
-                st.warning(f"timestampUtc column not found. Available columns: {list(df.columns)}")
 
             # Display all records (scrollable)
             st.markdown("##### Data Preview")
