@@ -23,11 +23,8 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Create virtual environment and install dependencies
-        run: |
-          python -m venv antenv
-          source antenv/bin/activate
-          pip install -r requirements.txt
+      - name: Validate requirements
+        run: pip install -r requirements.txt
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
@@ -40,6 +37,7 @@ jobs:
             !__pycache__/
             !**/__pycache__/
             !*.pyc
+            !antenv/
 
   deploy:
     runs-on: ubuntu-latest
@@ -58,3 +56,4 @@ jobs:
           app-name: 'event-marker-data-export'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: .
