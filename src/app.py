@@ -246,7 +246,14 @@ def main():
             # Convert to DataFrame and add subject_identifier column
             df = pd.DataFrame(items)
             df.insert(0, "subject_identifier", selected_identifier)
-            
+
+            # Add Eastern Time column derived from timestampUtc
+            if "timestampUtc" in df.columns:
+                utc_col = pd.to_datetime(df["timestampUtc"], utc=True)
+                et_col = utc_col.dt.tz_convert("America/New_York")
+                et_position = df.columns.get_loc("timestampUtc") + 1
+                df.insert(et_position, "timestampET", et_col)
+
             # Display all records (scrollable)
             st.markdown("##### Data Preview")
             st.dataframe(df, use_container_width=True, height=400)

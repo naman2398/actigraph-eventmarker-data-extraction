@@ -2,8 +2,9 @@
 
 A lightweight, web-based tool for extracting Event Marker data from the ActiGraph CentrePoint 3 API.
 
+**Live URL:** https://event-marker-data-export-cnczf6dkc3bne9gh.eastus2-01.azurewebsites.net  
 **Tech Stack:** Python 3.12, Streamlit, Azure App Service  
-**Package Manager:** uv
+**Package Manager:** uv (local) / pip (deployment)
 
 ## Project Structure
 
@@ -11,93 +12,109 @@ A lightweight, web-based tool for extracting Event Marker data from the ActiGrap
 actigraph-eventmarker-data-extraction/
 ├── .github/
 │   └── workflows/
-│       └── deploy.yml              # CI/CD pipeline for Azure deployment (Phase 3)
+│       └── deploy.yml          # CI/CD pipeline for Azure deployment
+├── docs/
+│   └── design-doc.md           # Full design specification
 ├── src/
 │   ├── __init__.py
-│   ├── auth.py                     # OAuth 2.0 authentication module
-│   ├── event_markers.py            # Event marker data retrieval
-│   └── app.py                      # Streamlit application (Phase 2)
-├── scripts/
-│   └── verify_api.py               # Phase 1: API connection verification
-├── .env.example                    # Template for environment variables
-├── .gitignore
-├── requirements.txt                # Python dependencies (generated from uv)
-├── pyproject.toml                  # uv project configuration
-├── centrepoint-design-doc.md       # Full design specification
+│   ├── app.py                  # Main Streamlit application
+│   └── api/
+│       ├── __init__.py         # API module exports
+│       ├── auth.py             # OAuth 2.0 token management
+│       ├── subjects.py         # Subject list fetching
+│       └── event_markers.py    # Event marker retrieval with pagination
+├── .env.example                # Template for environment variables
+├── startup.sh                  # Azure startup script
+├── requirements.txt            # Python dependencies
+├── pyproject.toml              # Project configuration
 └── README.md
 ```
 
-## Development Phases
+## Features
 
-### Phase 1: API Connection Verification ✅
+- ✅ OAuth 2.0 authentication with ActiGraph API
+- ✅ Simple password-protected access
+- ✅ Automatic subject list loading on login
+- ✅ Subject selection via user-friendly identifiers
+- ✅ Date range selection
+- ✅ Automatic pagination for large datasets
+- ✅ CSV export with download button
+- ✅ Automated deployment via GitHub Actions
 
-Validate ActiGraph credentials and API connectivity.
+## Local Development
 
-**Setup:**
-1. Create environment file:
+### Setup
+
+1. Clone the repository and install dependencies:
+   ```bash
+   git clone https://github.com/naman2398/actigraph-eventmarker-data-extraction.git
+   cd actigraph-eventmarker-data-extraction
+   uv sync
+   ```
+
+2. Create environment file:
    ```bash
    cp .env.example .env
    ```
 
-2. Edit `.env` with your credentials:
-   - `CLIENT_ID`: ActiGraph API client ID
-   - `CLIENT_SECRET`: ActiGraph API client secret
-   - `STUDY_ID`: Study ID for testing
-   - `APP_PASSWORD`: Password for application access
-   - `SUBJECT_ID`: Subject ID for testing (Phase 1 only)
-   - `FROM_DATE` / `TO_DATE`: Date range (YYYY-MM-DD, Phase 1 only)
-
-3. Run verification script:
-   ```bash
-   uv run python scripts/verify_api.py
+3. Edit `.env` with your credentials:
+   ```
+   CLIENT_ID=your_actigraph_client_id
+   CLIENT_SECRET=your_actigraph_client_secret
+   STUDY_ID=your_study_id
+   APP_PASSWORD=your_app_password
    ```
 
-### Phase 2: Application Development ✅
+### Run Locally
 
-Build the interactive Streamlit interface with subject identifier dropdown.
-
-**Features:**
-- Simple password-based authentication
-- Automatic subject list refresh on login
-- Subject selection via user-friendly identifiers (not numeric IDs)
-- Internal mapping of Subject Identifier → Subject ID
-- Date range selection
-- CSV export functionality
-
-**Run Locally:**
 ```bash
 uv run streamlit run src/app.py
 ```
 
-**Usage:**
-1. Open browser at `http://localhost:8501`
-2. Enter the application password (from `.env`)
-3. Wait for subjects to load (happens automatically after login)
-4. Select subject identifier from dropdown
-5. Choose date range
+Open browser at `http://localhost:8501`
+
+## Deployment
+
+The application is deployed to Azure App Service with automatic CI/CD via GitHub Actions.
+
+### Deployment Flow
+
+1. Push to `main` branch triggers GitHub Actions workflow
+2. Workflow installs dependencies and creates virtual environment
+3. Application is deployed to Azure App Service
+4. Startup script activates virtual environment and runs Streamlit
+
+### Azure Configuration
+
+**Required App Settings:**
+| Name | Description |
+|------|-------------|
+| `CLIENT_ID` | ActiGraph API client ID |
+| `CLIENT_SECRET` | ActiGraph API client secret |
+| `STUDY_ID` | CentrePoint Study ID |
+| `APP_PASSWORD` | Application login password |
+
+**Startup Command:** `bash startup.sh`
+
+### Manual Deployment
+
+To trigger a manual deployment, go to GitHub Actions and run the workflow manually.
+
+## Usage
+
+1. Navigate to the application URL
+2. Enter the application password
+3. Wait for subjects to load automatically
+4. Select a subject identifier from the dropdown
+5. Choose start and end dates
 6. Click "Fetch Event Markers"
-7. Download CSV
-   uv run scripts/verify_api.py
-   ```
-
-### Phase 2: Streamlit Application (In Progress)
-
-Build interactive UI for data extraction with CSV export.
-
-**Coming soon:**
-- Password-protected interface
-- Interactive date/ID selectors
-- Automatic pagination handling
-- CSV download functionality
-
-### Phase 3: Azure Deployment (Planned)
-
-Deploy to Azure App Service with GitHub Actions CI/CD.
+7. View data preview and download as CSV
 
 ## API Documentation
 
 - [Event Markers API](https://github.com/actigraph/CentrePoint3APIDocumentation/blob/main/sections/event_markers.md)
 - [Authorization](https://github.com/actigraph/CentrePoint3APIDocumentation/blob/main/sections/authorization.md)
+- [Scopes](https://github.com/actigraph/CentrePoint3APIDocumentation/blob/main/sections/scopes.md)
 - [Scopes](https://github.com/actigraph/CentrePoint3APIDocumentation/blob/main/sections/scopes.md)
 
 ## Requirements
